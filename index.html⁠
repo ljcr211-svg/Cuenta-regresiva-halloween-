@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuenta Regresiva para Halloween 🎃</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a0b2e, #0d0414);
+            color: #ff7518;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+            color: #ff9f43;
+            text-shadow: 0 0 10px rgba(255, 117, 24, 0.5);
+        }
+        .emoji {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .countdown-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            max-width: 350px;
+            width: 90%;
+        }
+        .time-box {
+            background: rgba(45, 15, 66, 0.8);
+            border: 2px solid #ff7518;
+            border-radius: 15px;
+            padding: 20px 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+        .time-box span {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fff;
+        }
+        .label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #ffb142;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="emoji">🎃👻</div>
+    <h1>Cuenta Regresiva<br>para Halloween</h1>
+
+    <div class="countdown-container">
+        <div class="time-box">
+            <span id="days">00</span>
+            <div class="label">Días</div>
+        </div>
+        <div class="time-box">
+            <span id="hours">00</span>
+            <div class="label">Horas</div>
+        </div>
+        <div class="time-box">
+            <span id="minutes">00</span>
+            <div class="label">Minutos</div>
+        </div>
+        <div class="time-box">
+            <span id="seconds">00</span>
+            <div class="label">Segundos</div>
+        </div>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            let halloween = new Date(`October 31, ${currentYear} 00:00:00`);
+
+            if (now > halloween) {
+                halloween = new Date(`October 31, ${currentYear + 1} 00:00:00`);
+            }
+
+            const diff = halloween - now;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / 1000 / 60) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            document.getElementById('days').innerText = String(days).padStart(2, '0');
+            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
